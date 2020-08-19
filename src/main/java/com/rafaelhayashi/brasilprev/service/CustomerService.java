@@ -2,6 +2,7 @@ package com.rafaelhayashi.brasilprev.service;
 
 import com.rafaelhayashi.brasilprev.controller.CustomerAddressForm;
 import com.rafaelhayashi.brasilprev.controller.CustomerForm;
+import com.rafaelhayashi.brasilprev.controller.CustomerUpdateForm;
 import com.rafaelhayashi.brasilprev.model.Address;
 import com.rafaelhayashi.brasilprev.model.Customer;
 import com.rafaelhayashi.brasilprev.repository.AddressRepository;
@@ -59,5 +60,16 @@ public class CustomerService {
             return true;
         }
         return false;
+    }
+
+    public Optional<Customer> update(String uuid, CustomerUpdateForm form) {
+        Optional<Customer> customerOptional = this.customerRepository.findByUuid(UUID.fromString(uuid));
+        if (!customerOptional.isPresent()) {
+            return Optional.empty();
+        }
+        Customer customer = customerOptional.get();
+        customer.setName(form.getName());
+        customer.setCpf(form.getCpf());
+        return Optional.of(customer);
     }
 }

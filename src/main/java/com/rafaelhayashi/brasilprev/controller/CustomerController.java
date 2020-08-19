@@ -64,6 +64,14 @@ public class CustomerController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/{uuid}")
+    public ResponseEntity<CustomerDetailsDto> update(@PathVariable String uuid, @RequestBody @Valid CustomerUpdateForm form){
+        Optional<Customer> customerOptional = this.customerService.update(uuid, form);
+        return customerOptional
+                .map(customer -> ResponseEntity.ok().body(new CustomerDetailsDto(customer)))
+                .orElseGet(ResponseEntity.notFound()::build);
+    }
+
     @DeleteMapping("/{uuid}")
     @Transactional
     public ResponseEntity<?> delete(@PathVariable String uuid) {
