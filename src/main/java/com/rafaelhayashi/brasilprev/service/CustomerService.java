@@ -1,21 +1,29 @@
 package com.rafaelhayashi.brasilprev.service;
 
+import com.rafaelhayashi.brasilprev.controller.CustomerAddressForm;
 import com.rafaelhayashi.brasilprev.controller.CustomerForm;
+import com.rafaelhayashi.brasilprev.model.Address;
 import com.rafaelhayashi.brasilprev.model.Customer;
+import com.rafaelhayashi.brasilprev.repository.AddressRepository;
 import com.rafaelhayashi.brasilprev.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final AddressRepository addressRepository;
 
     @Autowired
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository, AddressRepository addressRepository) {
         this.customerRepository = customerRepository;
+        this.addressRepository = addressRepository;
     }
 
 
@@ -27,5 +35,16 @@ public class CustomerService {
         Customer customer = customerForm.convert();
         this.customerRepository.save(customer);
         return customer;
+    }
+
+    public Optional<Customer> createAddress(String uuid, CustomerAddressForm form) {
+        Optional<Customer> customerOptional = this.customerRepository.findByUuid(UUID.fromString(uuid));
+        if(customerOptional.isPresent()){
+            Address address = form.convert();
+            this.addressRepository.save(address);
+            customerOptional.get().setAddress(address);
+            return customerOptional;
+        }
+        return Optional.empty();
     }
 }

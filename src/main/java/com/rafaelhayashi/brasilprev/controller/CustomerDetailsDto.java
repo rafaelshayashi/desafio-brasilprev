@@ -9,6 +9,7 @@ public class CustomerDetailsDto {
     private final String uuid;
     private final String name;
     private final String cpf;
+    private final AddressDto address;
     private final String createdAt;
     private final String updatedAt;
 
@@ -16,6 +17,7 @@ public class CustomerDetailsDto {
         this.uuid = customer.getUuid().toString();
         this.name = customer.getName();
         this.cpf = customer.getCpf();
+        this.address = (customer.getAddress() != null) ? new AddressDto(customer.getAddress()) : null;
         this.createdAt = customer.getCreatedAt().format(DateTimeFormatter.ISO_DATE_TIME);
         this.updatedAt = customer.getUpdatedAt().format(DateTimeFormatter.ISO_DATE_TIME);
     }
@@ -30,6 +32,10 @@ public class CustomerDetailsDto {
 
     public String getCpf() {
         return cpf;
+    }
+
+    public AddressDto getAddress() {
+        return address;
     }
 
     public String getCreatedAt() {

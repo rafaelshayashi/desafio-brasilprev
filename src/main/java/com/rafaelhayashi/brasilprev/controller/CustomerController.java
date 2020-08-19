@@ -12,6 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/customers")
@@ -38,6 +39,20 @@ public class CustomerController {
         Customer customer = this.customerService.create(customerForm);
         URI uri = uriBuilder.path("/api/v1/customers/{uuid}").buildAndExpand(customer.getUuid().toString()).toUri();
         return ResponseEntity.created(uri).body(new CustomerDetailsDto(customer));
+    }
+
+    @PostMapping("/{uuid}/address")
+    @Transactional
+    public ResponseEntity<CustomerDetailsDto> createAddress(@PathVariable String uuid,
+                                                            @RequestBody @Valid CustomerAddressForm form,
+                                                            UriComponentsBuilder uriBuilder) {
+        Optional<Customer> customerOptional = this.customerService.createAddress(uuid, form);
+        return customerOptional
+                .map(customer -> {
+                    URI uri = uriBuilder.path("/api/v1/customers/{uuid}/address").buildAndExpand(customer.getUuid().toString()).toUri();
+                    return ResponseEntity.created(uri).body(new CustomerDetailsDto(customer));
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 }
