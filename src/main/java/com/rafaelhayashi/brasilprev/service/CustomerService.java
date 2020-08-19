@@ -1,5 +1,6 @@
 package com.rafaelhayashi.brasilprev.service;
 
+import com.rafaelhayashi.brasilprev.controller.CustomerForm;
 import com.rafaelhayashi.brasilprev.model.Customer;
 import com.rafaelhayashi.brasilprev.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,11 @@ public class CustomerService {
 
     public Page<Customer> list(Pageable pageable) {
         return this.customerRepository.findAll(pageable);
+    }
+
+    public Customer create(CustomerForm customerForm) {
+        Customer customer = customerForm.convert();
+        this.customerRepository.save(customer);
+        return customer;
     }
 }
