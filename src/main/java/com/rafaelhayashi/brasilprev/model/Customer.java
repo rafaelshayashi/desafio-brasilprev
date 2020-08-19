@@ -30,7 +30,7 @@ public class Customer {
     @Column(nullable = false, unique = true, length = 14)
     private String cpf;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Address address;
 
     @CreationTimestamp

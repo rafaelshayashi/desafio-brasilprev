@@ -39,7 +39,7 @@ public class CustomerService {
 
     public Optional<Customer> createAddress(String uuid, CustomerAddressForm form) {
         Optional<Customer> customerOptional = this.customerRepository.findByUuid(UUID.fromString(uuid));
-        if(customerOptional.isPresent()){
+        if (customerOptional.isPresent()) {
             Address address = form.convert();
             this.addressRepository.save(address);
             customerOptional.get().setAddress(address);
@@ -50,5 +50,14 @@ public class CustomerService {
 
     public Optional<Customer> details(String uuid) {
         return this.customerRepository.findByUuid(UUID.fromString(uuid));
+    }
+
+    public boolean delete(String uuid) {
+        Optional<Customer> customerOptional = customerRepository.findByUuid(UUID.fromString(uuid));
+        if (customerOptional.isPresent()) {
+            this.customerRepository.delete(customerOptional.get());
+            return true;
+        }
+        return false;
     }
 }

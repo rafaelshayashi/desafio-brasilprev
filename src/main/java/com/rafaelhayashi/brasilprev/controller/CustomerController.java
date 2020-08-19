@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -56,11 +57,21 @@ public class CustomerController {
     }
 
     @GetMapping("/{uuid}")
-    public ResponseEntity<CustomerDetailsDto> details(@PathVariable String uuid){
+    public ResponseEntity<CustomerDetailsDto> details(@PathVariable String uuid) {
         Optional<Customer> customerOptional = this.customerService.details(uuid);
         return customerOptional
                 .map(customer -> ResponseEntity.ok().body(new CustomerDetailsDto(customer)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{uuid}")
+    @Transactional
+    public ResponseEntity<?> delete(@PathVariable String uuid) {
+        boolean deleted = this.customerService.delete(uuid);
+        if (!deleted) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().build();
     }
 
 }
