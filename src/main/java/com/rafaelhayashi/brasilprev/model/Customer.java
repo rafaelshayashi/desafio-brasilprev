@@ -30,7 +30,6 @@ public class Customer {
     private String cpf;
 
     @OneToOne
-    @JoinColumn(nullable = false)
     private Address address;
 
     @CreationTimestamp
