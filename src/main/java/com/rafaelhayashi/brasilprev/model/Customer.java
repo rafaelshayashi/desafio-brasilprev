@@ -5,6 +5,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -16,7 +17,7 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty
+    @NotNull
     @Type(type = "uuid-char")
     @Column(nullable = false, length = 36)
     private UUID uuid;
@@ -29,8 +30,7 @@ public class Customer {
     @Column(nullable = false, unique = true, length = 14)
     private String cpf;
 
-    @OneToOne
-    @JoinColumn(nullable = false)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Address address;
 
     @CreationTimestamp
@@ -45,6 +45,12 @@ public class Customer {
 
     @Deprecated
     public Customer(){}
+
+    public Customer(@NotEmpty String name, @NotEmpty String cpf) {
+        this.uuid = UUID.randomUUID();
+        this.name = name;
+        this.cpf = cpf;
+    }
 
     public Long getId() {
         return id;
