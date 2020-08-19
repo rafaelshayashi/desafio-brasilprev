@@ -6,13 +6,16 @@ Construir uma API REST com as funcionalidades de um cadastro de clientes
 ## TODO
 
 - [X] model e repository
-- [ ] controller e service
-  - [ ] Validação dos dados de entrada
+- [X] controller e service
+  - [X] Validação básica dos dados de entrada
   - [ ] Handle exception
   - [ ] i18n para as messagens de erros
-- [ ] tests
+- [ ] Organização dos packages - Refatoração
+- [ ] Validação CPF - Refatoração
+- [ ] Testes
+- [ ] Docker
 
-## Controle de versao e fluxo de trabalho
+## Controle de versão e fluxo de trabalho
 
 Foi utilizado o git flow para o desenvolvimento desse desafio, sendo
 cada que cada implementação de feature foi feita em um branch
