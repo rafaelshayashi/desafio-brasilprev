@@ -55,4 +55,12 @@ public class CustomerController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/{uuid}")
+    public ResponseEntity<CustomerDetailsDto> details(@PathVariable String uuid){
+        Optional<Customer> customerOptional = this.customerService.details(uuid);
+        return customerOptional
+                .map(customer -> ResponseEntity.ok().body(new CustomerDetailsDto(customer)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
 }

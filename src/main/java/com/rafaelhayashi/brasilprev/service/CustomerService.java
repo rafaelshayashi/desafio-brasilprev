@@ -47,4 +47,8 @@ public class CustomerService {
         }
         return Optional.empty();
     }
+
+    public Optional<Customer> details(String uuid) {
+        return this.customerRepository.findByUuid(UUID.fromString(uuid));
+    }
 }
