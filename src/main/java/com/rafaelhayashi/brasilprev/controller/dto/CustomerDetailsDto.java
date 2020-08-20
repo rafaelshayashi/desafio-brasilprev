@@ -1,5 +1,6 @@
-package com.rafaelhayashi.brasilprev.controller;
+package com.rafaelhayashi.brasilprev.controller.dto;
 
+import com.rafaelhayashi.brasilprev.controller.dto.AddressDto;
 import com.rafaelhayashi.brasilprev.model.Customer;
 
 import java.time.format.DateTimeFormatter;

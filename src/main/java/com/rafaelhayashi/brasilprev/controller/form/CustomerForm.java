@@ -1,4 +1,4 @@
-package com.rafaelhayashi.brasilprev.controller;
+package com.rafaelhayashi.brasilprev.controller.form;
 
 import com.rafaelhayashi.brasilprev.model.Customer;
 import com.rafaelhayashi.brasilprev.util.annotation.UniqueCpf;
