@@ -1,12 +1,18 @@
 package com.rafaelhayashi.brasilprev.controller;
 
+import com.rafaelhayashi.brasilprev.controller.dto.CustomerDetailsDto;
+import com.rafaelhayashi.brasilprev.controller.dto.CustomerDto;
+import com.rafaelhayashi.brasilprev.controller.form.CustomerAddressForm;
+import com.rafaelhayashi.brasilprev.controller.form.CustomerForm;
+import com.rafaelhayashi.brasilprev.controller.form.CustomerUpdateForm;
 import com.rafaelhayashi.brasilprev.model.Customer;
 import com.rafaelhayashi.brasilprev.service.CustomerService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -17,6 +23,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/customers")
+@Tag(name = "Customers")
 public class CustomerController {
 
 
@@ -28,7 +35,7 @@ public class CustomerController {
     }
 
     @GetMapping
-    public Page<CustomerDto> list(Pageable pageable) {
+    public Page<CustomerDto> list(@ParameterObject Pageable pageable) {
         Page<Customer> customers = this.customerService.list(pageable);
         return CustomerDto.convert(customers);
     }

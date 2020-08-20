@@ -8,12 +8,15 @@ Construir uma API REST com as funcionalidades de um cadastro de clientes
 - [X] model e repository
 - [X] controller e service
   - [X] Validação básica dos dados de entrada
-  - [ ] Handle exception
-  - [ ] i18n para as messagens de erros
-- [ ] Organização dos packages - Refatoração
-- [ ] Validação CPF - Refatoração
-- [ ] Testes
-- [ ] Docker
+  - [X] Handle exception
+  - [X] i18n para as messagens de erros
+- [X] Refatoração
+  - [X] Organização dos packages
+  - [X] Validação CPF
+  - [X] Validação unicidade
+- [X] Testes
+- [X] Docker e deploy Heroku
+- [X] Documentaçao OpenAPI
 
 
 ## Dependências
@@ -42,3 +45,10 @@ mvn docker:build
 docker container run -p 8080:8080 rafaelshayashi/brasilprev
 ```
 
+## Consumindo
+
+O Deploy foi efetuado no Heroku, podendo ser acesso através
+https://rafaelshayashi-brasilprev.herokuapp.com/api/v1
+
+A documentação (OpenApi) pode ser acessada através
+https://rafaelshayashi-brasilprev.herokuapp.com/swagger-ui.html
