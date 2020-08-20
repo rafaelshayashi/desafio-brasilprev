@@ -1,8 +1,8 @@
 package com.rafaelhayashi.brasilprev.service;
 
-import com.rafaelhayashi.brasilprev.controller.CustomerAddressForm;
-import com.rafaelhayashi.brasilprev.controller.CustomerForm;
-import com.rafaelhayashi.brasilprev.controller.CustomerUpdateForm;
+import com.rafaelhayashi.brasilprev.controller.form.CustomerAddressForm;
+import com.rafaelhayashi.brasilprev.controller.form.CustomerForm;
+import com.rafaelhayashi.brasilprev.controller.form.CustomerUpdateForm;
 import com.rafaelhayashi.brasilprev.model.Address;
 import com.rafaelhayashi.brasilprev.model.Customer;
 import com.rafaelhayashi.brasilprev.repository.AddressRepository;
