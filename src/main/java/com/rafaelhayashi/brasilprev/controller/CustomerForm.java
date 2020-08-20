@@ -1,8 +1,10 @@
 package com.rafaelhayashi.brasilprev.controller;
 
 import com.rafaelhayashi.brasilprev.model.Customer;
+import com.rafaelhayashi.brasilprev.util.annotation.UniqueCpf;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class CustomerForm {
@@ -12,6 +14,8 @@ public class CustomerForm {
 
     @NotEmpty
     @Size(max = 14)
+    @Pattern(regexp = "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$")
+    @UniqueCpf
     private String cpf;
 
     public String getName() {
