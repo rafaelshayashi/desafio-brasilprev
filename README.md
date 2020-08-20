@@ -14,7 +14,7 @@ Construir uma API REST com as funcionalidades de um cadastro de clientes
   - [X] Organização dos packages
   - [X] Validação CPF
   - [X] Validação unicidade
-- [ ] Testes
+- [X] Testes
 - [X] Docker e deploy Heroku
 - [X] Documentaçao OpenAPI
 
